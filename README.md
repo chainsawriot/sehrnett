@@ -68,3 +68,39 @@ search_lemma("nice", pos = "n")
 #>   pos     lexdomain
 #> 1   n noun.location
 ```
+
+## A practical example
+
+For example, you want to know the synonyms of the word “nuance” (very
+important for academic writing). You can first search using the lemma
+“nuance” with `search_lemma`.
+
+``` r
+res <- search_lemma("nuance")
+res
+#>    synsetid  lemma sensenum
+#> 1 106541787 nuance        1
+#>                                              definition pos          lexdomain
+#> 1 a subtle difference in meaning or opinion or attitude   n noun.communication
+```
+
+There could be multiple word senses and you need to choose which word
+sense you want to convey. But in this case, there is only one. You can
+then search for the `synsetid` (cognitive synonym identifier) of that
+word sense.
+
+``` r
+search_synsetid(res$synsetid[1])
+#>    synsetid      lemma sensenum
+#> 1 106541787     nicety        2
+#> 2 106541787     nuance        1
+#> 3 106541787 refinement        4
+#> 4 106541787      shade        4
+#> 5 106541787   subtlety        1
+#>                                              definition pos          lexdomain
+#> 1 a subtle difference in meaning or opinion or attitude   n noun.communication
+#> 2 a subtle difference in meaning or opinion or attitude   n noun.communication
+#> 3 a subtle difference in meaning or opinion or attitude   n noun.communication
+#> 4 a subtle difference in meaning or opinion or attitude   n noun.communication
+#> 5 a subtle difference in meaning or opinion or attitude   n noun.communication
+```

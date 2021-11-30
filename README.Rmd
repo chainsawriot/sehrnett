@@ -44,3 +44,18 @@ search_lemma("nice")
 ```{r}
 search_lemma("nice", pos = "n")
 ```
+
+## A practical example
+
+For example, you want to know the synonyms of the word "nuance" (very important for academic writing). You can first search using the lemma "nuance" with `search_lemma`.
+
+```{r}
+res <- search_lemma("nuance")
+res
+```
+
+There could be multiple word senses and you need to choose which word sense you want to convey. But in this case, there is only one. You can then search for the `synsetid` (cognitive synonym identifier) of that word sense.
+
+```{r}
+search_synsetid(res$synsetid[1])
+```
