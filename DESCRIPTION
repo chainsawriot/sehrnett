@@ -1,0 +1,18 @@
+Package: sehrnett
+Title: A Nice Interface To WordNet
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Chung-hong",
+           family = "Chan",
+           role = c("aut", "cre"),
+           email = "chainsawtiney@gmail.com",
+           comment = c(ORCID = "0000-0002-6232-7530"))
+Description: A nice interface to Princeton\'s WordNet without rJava dependency. WordNet data is not included but a function is provided to download such data automatically.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

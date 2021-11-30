@@ -1,0 +1,46 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+devtools::load_all()
+```
+
+# sehrnett
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of sehrnett is to provide a nice (and fast) interface to [Princeton's WordNet](https://wordnet.princeton.edu/). Unlike the original [wordnet package](https://cran.r-project.org/web/packages/wordnet/index.html) (Feinerer et al., 2020), you don't need to install WordNet and / or setup rJava.
+
+The data is not included in the package. A function will be provided later to download the data (~100M Zipped, ~400M Unzipped) from the Internet, if such data is not available. Please make sure you agree with the [WordNet License](https://wordnet.princeton.edu/license-and-commercial-use).
+
+## Installation
+
+``` r
+devtools::install_github("chainsawriot/sehrnett")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```r
+library(sehrnett)
+```
+
+```{r}
+search_lemma("nice")
+```
+
+```{r}
+search_lemma("nice", pos = "n")
+```
