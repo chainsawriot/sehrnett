@@ -14,10 +14,9 @@ package](https://cran.r-project.org/web/packages/wordnet/index.html)
 (Feinerer et al., 2020), you don’t need to install WordNet and / or
 setup rJava.
 
-The data is not included in the package. A function will be provided
-later to download the data (\~100M Zipped, \~400M Unzipped) from the
-Internet, if such data is not available. Please make sure you agree with
-the [WordNet
+The data is not included in the package. The package will download the
+data (\~100M Zipped, \~400M Unzipped) from the Internet, if such data is
+not available. Please make sure you agree with the [WordNet
 License](https://wordnet.princeton.edu/license-and-commercial-use).
 
 ## Installation
@@ -37,12 +36,12 @@ library(sehrnett)
 ``` r
 search_lemma("nice")
 #>    synsetid lemma sensenum
-#> 1 301590922  nice        1
-#> 2 108871659  nice        1
-#> 3 302000844  nice        2
-#> 4 301844822  nice        3
-#> 5 300987625  nice        4
-#> 6 300644573  nice        5
+#> 1 301590750  nice        1
+#> 2 108957024  nice        1
+#> 3 302000490  nice        2
+#> 4 301844650  nice        3
+#> 5 300987524  nice        4
+#> 6 300644482  nice        5
 #>                                                                                     definition
 #> 1                                    pleasant or pleasing or agreeable in nature or appearance
 #> 2 a city in southeastern France on the Mediterranean; the leading resort on the French Riviera
@@ -62,7 +61,7 @@ search_lemma("nice")
 ``` r
 search_lemma("nice", pos = "n")
 #>    synsetid lemma sensenum
-#> 1 108871659  nice        1
+#> 1 108957024  nice        1
 #>                                                                                     definition
 #> 1 a city in southeastern France on the Mediterranean; the leading resort on the French Riviera
 #>   pos     lexdomain
@@ -79,7 +78,7 @@ important for academic writing). You can first search using the lemma
 res <- search_lemma("nuance")
 res
 #>    synsetid  lemma sensenum
-#> 1 106541787 nuance        1
+#> 1 106618544 nuance        1
 #>                                              definition pos          lexdomain
 #> 1 a subtle difference in meaning or opinion or attitude   n noun.communication
 ```
@@ -92,11 +91,11 @@ word sense.
 ``` r
 search_synsetid(res$synsetid[1])
 #>    synsetid      lemma sensenum
-#> 1 106541787     nicety        2
-#> 2 106541787     nuance        1
-#> 3 106541787 refinement        4
-#> 4 106541787      shade        4
-#> 5 106541787   subtlety        1
+#> 1 106618544     nicety        2
+#> 2 106618544     nuance        1
+#> 3 106618544 refinement        4
+#> 4 106618544      shade        4
+#> 5 106618544   subtlety        1
 #>                                              definition pos          lexdomain
 #> 1 a subtle difference in meaning or opinion or attitude   n noun.communication
 #> 2 a subtle difference in meaning or opinion or attitude   n noun.communication

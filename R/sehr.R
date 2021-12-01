@@ -1,8 +1,7 @@
-
-## library(DBI)
 nett_con <- NULL
 .onLoad <- function(libname, pkgname) {
-    nett_con <<- DBI::dbConnect(RSQLite::SQLite(), system.file("sqlite-31_snapshot.db", package = "sehrnett"))
+    .download()
+    nett_con <<- DBI::dbConnect(RSQLite::SQLite(), system.file("sqlite-31.db", package = "sehrnett"))
 }
 
 .onUnload <- function(libname, pkgname) {
@@ -28,15 +27,13 @@ search_synsetid <- function(synsetid = "301590922") {
     DBI::dbGetQuery(nett_con, q)    
 }
 
-## "dog.n.1"
-
-## q <- "SELECT s.synsetid AS synsetid, s.definition AS definition, s.pos AS pos, l.lexdomainname AS lexdomain FROM wordsXsensesXsynsets AS s LEFT JOIN lexdomains AS l ON l.lexdomainid = s.lexdomainid WHERE s.pos = 'n' AND s.lemma = 'dog' AND s.sensenum = '1'"
-
-## res <- dbSendQuery(con, q)
-## x <- dbFetch(res)
-## x$synsetid
-
-## q <- glue::glue("SELECT s.synsetid AS synsetid, s.lemma AS lemma, s.definition AS definition, s.pos AS pos, l.lexdomainname AS lexdomain FROM wordsXsensesXsynsets AS s LEFT JOIN lexdomains AS l ON l.lexdomainid = s.lexdomainid WHERE s.synsetid = {id} ORDER BY s.pos, s.sensenum", id = x$synsetid)
-
-## res <- dbSendQuery(con, q)
-## y <- dbFetch(res)
+#' Search For Lemma in WordNet
+#' 
+## search_lemma <- function(lemma = c("very", "nice"), pos = c("n", "v", "a", "s", "r")) {
+##     res <- DBI::dbSendQuery(nett_con, "SELECT s.synsetid AS synsetid, s.lemma as lemma, s.sensenum as sensenum, s.definition AS definition, s.pos AS pos, l.lexdomainname AS lexdomain FROM wordsXsensesXsynsets AS s LEFT JOIN lexdomains AS l ON l.lexdomainid = s.lexdomainid WHERE s.lemma = $slemma ORDER BY s.pos, s.sensenum")
+##     DBI::dbBind(res, list(slemma = lemma))
+##     output <- DBI::dbFetch(res)
+##     DBI::dbClearResult(res)
+##     output <- output[output$pos %in% pos,]
+##     return(output)
+## }
