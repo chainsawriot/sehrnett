@@ -61,5 +61,14 @@ res
 There could be multiple word senses and you need to choose which word sense you want to convey. But in this case, there is only one. You can then search for the `synsetid` (cognitive synonym identifier) of that word sense.
 
 ```{r}
+# search_synonym() is a wrapper to search_synsetid
 search_synsetid(res$synsetid[1])
+```
+
+## Chainablilty
+
+All `search_` functions are chainable by using the magrittr pipe operator.
+
+```{r}
+c("switch off") %>% search_lemma(pos = "v") %>% search_synonym
 ```

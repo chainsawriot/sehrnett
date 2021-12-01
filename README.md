@@ -35,74 +35,40 @@ library(sehrnett)
 
 ``` r
 search_lemma(c("very", "nice"))
-#>     synsetid lemma sensenum
-#> 1  400032295  very        1
-#> 2  400513282  very        2
-#> 3  301845232  very        1
-#> 4  302076350  very        2
-#> 5  301590750  nice        1
-#> 6  108957024  nice        1
-#> 7  302000490  nice        2
-#> 8  301844650  nice        3
-#> 9  300987524  nice        4
-#> 10 300644482  nice        5
-#>                                                                                      definition
-#> 1   used as intensifiers; real' is sometimes used informally for really'; rattling' is informal
-#> 2                                                                                  precisely so
-#> 3                                                                           precisely as stated
-#> 4                                                      being the exact same one; not any other:
-#> 5                                     pleasant or pleasing or agreeable in nature or appearance
-#> 6  a city in southeastern France on the Mediterranean; the leading resort on the French Riviera
-#> 7                                       socially or conventionally correct; refined or virtuous
-#> 8                                                                  done with delicacy and skill
-#> 9                                                   excessively fastidious and easily disgusted
-#> 10                                                           exhibiting courtesy and politeness
-#>    pos     lexdomain
-#> 1    r       adv.all
-#> 2    r       adv.all
-#> 3    s       adj.all
-#> 4    s       adj.all
-#> 5    a       adj.all
-#> 6    n noun.location
-#> 7    s       adj.all
-#> 8    s       adj.all
-#> 9    s       adj.all
-#> 10   s       adj.all
+#> # A tibble: 10 × 6
+#>     synsetid lemma sensenum definition                          pos   lexdomain 
+#>        <int> <chr>    <int> <chr>                               <chr> <chr>     
+#>  1 400032295 very         1 used as intensifiers; real' is som… r     adv.all   
+#>  2 400513282 very         2 precisely so                        r     adv.all   
+#>  3 301845232 very         1 precisely as stated                 s     adj.all   
+#>  4 302076350 very         2 being the exact same one; not any … s     adj.all   
+#>  5 301590750 nice         1 pleasant or pleasing or agreeable … a     adj.all   
+#>  6 108957024 nice         1 a city in southeastern France on t… n     noun.loca…
+#>  7 302000490 nice         2 socially or conventionally correct… s     adj.all   
+#>  8 301844650 nice         3 done with delicacy and skill        s     adj.all   
+#>  9 300987524 nice         4 excessively fastidious and easily … s     adj.all   
+#> 10 300644482 nice         5 exhibiting courtesy and politeness  s     adj.all
 ```
 
 ``` r
 search_lemma("nice")
-#>    synsetid lemma sensenum
-#> 1 301590750  nice        1
-#> 2 108957024  nice        1
-#> 3 302000490  nice        2
-#> 4 301844650  nice        3
-#> 5 300987524  nice        4
-#> 6 300644482  nice        5
-#>                                                                                     definition
-#> 1                                    pleasant or pleasing or agreeable in nature or appearance
-#> 2 a city in southeastern France on the Mediterranean; the leading resort on the French Riviera
-#> 3                                      socially or conventionally correct; refined or virtuous
-#> 4                                                                 done with delicacy and skill
-#> 5                                                  excessively fastidious and easily disgusted
-#> 6                                                           exhibiting courtesy and politeness
-#>   pos     lexdomain
-#> 1   a       adj.all
-#> 2   n noun.location
-#> 3   s       adj.all
-#> 4   s       adj.all
-#> 5   s       adj.all
-#> 6   s       adj.all
+#> # A tibble: 6 × 6
+#>    synsetid lemma sensenum definition                           pos   lexdomain 
+#>       <int> <chr>    <int> <chr>                                <chr> <chr>     
+#> 1 301590750 nice         1 pleasant or pleasing or agreeable i… a     adj.all   
+#> 2 108957024 nice         1 a city in southeastern France on th… n     noun.loca…
+#> 3 302000490 nice         2 socially or conventionally correct;… s     adj.all   
+#> 4 301844650 nice         3 done with delicacy and skill         s     adj.all   
+#> 5 300987524 nice         4 excessively fastidious and easily d… s     adj.all   
+#> 6 300644482 nice         5 exhibiting courtesy and politeness   s     adj.all
 ```
 
 ``` r
 search_lemma("nice", pos = "n")
-#>    synsetid lemma sensenum
-#> 2 108957024  nice        1
-#>                                                                                     definition
-#> 2 a city in southeastern France on the Mediterranean; the leading resort on the French Riviera
-#>   pos     lexdomain
-#> 2   n noun.location
+#> # A tibble: 1 × 6
+#>    synsetid lemma sensenum definition                           pos   lexdomain 
+#>       <int> <chr>    <int> <chr>                                <chr> <chr>     
+#> 1 108957024 nice         1 a city in southeastern France on th… n     noun.loca…
 ```
 
 ## A practical example
@@ -114,10 +80,10 @@ important for academic writing). You can first search using the lemma
 ``` r
 res <- search_lemma("nuance")
 res
-#>    synsetid  lemma sensenum
-#> 1 106618544 nuance        1
-#>                                              definition pos          lexdomain
-#> 1 a subtle difference in meaning or opinion or attitude   n noun.communication
+#> # A tibble: 1 × 6
+#>    synsetid lemma  sensenum definition                       pos   lexdomain    
+#>       <int> <chr>     <int> <chr>                            <chr> <chr>        
+#> 1 106618544 nuance        1 a subtle difference in meaning … n     noun.communi…
 ```
 
 There could be multiple word senses and you need to choose which word
@@ -126,17 +92,30 @@ then search for the `synsetid` (cognitive synonym identifier) of that
 word sense.
 
 ``` r
+# search_synonym() is a wrapper to search_synsetid
 search_synsetid(res$synsetid[1])
-#>    synsetid      lemma sensenum
-#> 1 106618544     nicety        2
-#> 2 106618544     nuance        1
-#> 3 106618544 refinement        4
-#> 4 106618544      shade        4
-#> 5 106618544   subtlety        1
-#>                                              definition pos          lexdomain
-#> 1 a subtle difference in meaning or opinion or attitude   n noun.communication
-#> 2 a subtle difference in meaning or opinion or attitude   n noun.communication
-#> 3 a subtle difference in meaning or opinion or attitude   n noun.communication
-#> 4 a subtle difference in meaning or opinion or attitude   n noun.communication
-#> 5 a subtle difference in meaning or opinion or attitude   n noun.communication
+#> # A tibble: 5 × 6
+#>    synsetid lemma      sensenum definition                    pos   lexdomain   
+#>       <int> <chr>         <int> <chr>                         <chr> <chr>       
+#> 1 106618544 nicety            2 a subtle difference in meani… n     noun.commun…
+#> 2 106618544 nuance            1 a subtle difference in meani… n     noun.commun…
+#> 3 106618544 refinement        4 a subtle difference in meani… n     noun.commun…
+#> 4 106618544 shade             4 a subtle difference in meani… n     noun.commun…
+#> 5 106618544 subtlety          1 a subtle difference in meani… n     noun.commun…
+```
+
+## Chainablilty
+
+All `search_` functions are chainable by using the magrittr pipe
+operator.
+
+``` r
+c("switch off") %>% search_lemma(pos = "v") %>% search_synonym
+#> # A tibble: 4 × 6
+#>    synsetid lemma      sensenum definition                      pos   lexdomain 
+#>       <int> <chr>         <int> <chr>                           <chr> <chr>     
+#> 1 201513208 cut              27 cause to stop operating by dis… v     verb.cont…
+#> 2 201513208 switch off        1 cause to stop operating by dis… v     verb.cont…
+#> 3 201513208 turn off          1 cause to stop operating by dis… v     verb.cont…
+#> 4 201513208 turn out         11 cause to stop operating by dis… v     verb.cont…
 ```
