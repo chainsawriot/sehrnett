@@ -38,6 +38,10 @@ library(sehrnett)
 ```
 
 ```{r}
+search_lemma(c("very", "nice"))
+```
+
+```{r}
 search_lemma("nice")
 ```
 

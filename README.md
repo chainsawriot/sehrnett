@@ -34,6 +34,43 @@ library(sehrnett)
 ```
 
 ``` r
+search_lemma(c("very", "nice"))
+#>     synsetid lemma sensenum
+#> 1  400032295  very        1
+#> 2  400513282  very        2
+#> 3  301845232  very        1
+#> 4  302076350  very        2
+#> 5  301590750  nice        1
+#> 6  108957024  nice        1
+#> 7  302000490  nice        2
+#> 8  301844650  nice        3
+#> 9  300987524  nice        4
+#> 10 300644482  nice        5
+#>                                                                                      definition
+#> 1   used as intensifiers; real' is sometimes used informally for really'; rattling' is informal
+#> 2                                                                                  precisely so
+#> 3                                                                           precisely as stated
+#> 4                                                      being the exact same one; not any other:
+#> 5                                     pleasant or pleasing or agreeable in nature or appearance
+#> 6  a city in southeastern France on the Mediterranean; the leading resort on the French Riviera
+#> 7                                       socially or conventionally correct; refined or virtuous
+#> 8                                                                  done with delicacy and skill
+#> 9                                                   excessively fastidious and easily disgusted
+#> 10                                                           exhibiting courtesy and politeness
+#>    pos     lexdomain
+#> 1    r       adv.all
+#> 2    r       adv.all
+#> 3    s       adj.all
+#> 4    s       adj.all
+#> 5    a       adj.all
+#> 6    n noun.location
+#> 7    s       adj.all
+#> 8    s       adj.all
+#> 9    s       adj.all
+#> 10   s       adj.all
+```
+
+``` r
 search_lemma("nice")
 #>    synsetid lemma sensenum
 #> 1 301590750  nice        1
@@ -61,11 +98,11 @@ search_lemma("nice")
 ``` r
 search_lemma("nice", pos = "n")
 #>    synsetid lemma sensenum
-#> 1 108957024  nice        1
+#> 2 108957024  nice        1
 #>                                                                                     definition
-#> 1 a city in southeastern France on the Mediterranean; the leading resort on the French Riviera
+#> 2 a city in southeastern France on the Mediterranean; the leading resort on the French Riviera
 #>   pos     lexdomain
-#> 1   n noun.location
+#> 2   n noun.location
 ```
 
 ## A practical example
