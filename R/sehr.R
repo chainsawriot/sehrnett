@@ -17,13 +17,13 @@ nett_con <- NULL
     return(output)
 }
 
-#' Search for Synset ID in WordNet
+#' Search for Synset IDs in WordNet
 #'
 #' Search for Synset ID(s) in WordNet
 #' @param x character, one or more Synset IDs to be searched
 #' @return a data frame containing search result
 #' @export
-search_synsetid <- function(x = c("301590922", "108957024")) {
+get_synsetids <- function(x = c("301590922", "108957024")) {
     if ("sehrnett" %in% class(x)) {
         synsetid <- unique(x$synsetid)
     } else {
@@ -34,20 +34,20 @@ search_synsetid <- function(x = c("301590922", "108957024")) {
     .fetch_q(q, params)
 }
 
-#' @rdname search_synsetid
+#' @rdname get_synsetids
 #' @export
-search_synonym <- function(x) {
-    search_synsetid(x)
+get_synonyms <- function(x) {
+    get_synsetids(x)
 }
 
-#' Search For Lemma in WordNet
+#' Search For Lemmas in WordNet
 #'
 #' Search for lemma(s) in WordNet.
 #' @param x character, one or more lemmas to be searched
 #' @param pos character, a vector of part-of-speech labels: "n": Noun, "v": Verb, "a": Adjective, "s": Adjective satellite, "r": Adverb
 #' @return a data frame containing search result
 #' @export
-search_lemma <- function(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r")) {
+get_lemmas <- function(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r")) {
     if (any(!pos %in% c("n", "v", "a", "s", "r"))) {
         stop("Unkown pos.")
     }

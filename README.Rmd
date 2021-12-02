@@ -31,44 +31,44 @@ devtools::install_github("chainsawriot/sehrnett")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+The most basic function is `get_lemmas`. It generates basic information about the lemmas you provided.
 
 ```r
 library(sehrnett)
 ```
 
 ```{r}
-search_lemma(c("very", "nice"))
+get_lemmas(c("very", "nice"))
 ```
 
 ```{r}
-search_lemma("nice")
+get_lemmas("nice")
 ```
 
 ```{r}
-search_lemma("nice", pos = "n")
+get_lemmas("nice", pos = "n")
 ```
 
 ## A practical example
 
-For example, you want to know the synonyms of the word "nuance" (very important for academic writing). You can first search using the lemma "nuance" with `search_lemma`.
+For example, you want to know the synonyms of the word "nuance" (very important for academic writing). You can first search using the lemma "nuance" with `get_lemmas`.
 
 ```{r}
-res <- search_lemma("nuance")
+res <- get_lemmas("nuance")
 res
 ```
 
 There could be multiple word senses and you need to choose which word sense you want to convey. But in this case, there is only one. You can then search for the `synsetid` (cognitive synonym identifier) of that word sense.
 
 ```{r}
-# search_synonym() is a wrapper to search_synsetid
-search_synsetid(res$synsetid[1])
+# get_synonyms() is a wrapper to search_synsetid
+get_synsetids(res$synsetid[1])
 ```
 
 ## Chainablilty
 
-All `search_` functions are chainable by using the magrittr pipe operator.
+All `get_` functions are chainable by using the magrittr pipe operator.
 
 ```{r}
-c("switch off") %>% search_lemma(pos = "v") %>% search_synonym
+c("switch off") %>% get_lemmas(pos = "v") %>% get_synonyms
 ```

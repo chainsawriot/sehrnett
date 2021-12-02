@@ -1,2 +1,4 @@
 ^README\.Rmd$
 ^LICENSE\.md$
+^inst/sqlite-31\.db$
+^\.gitignore$

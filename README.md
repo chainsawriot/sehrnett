@@ -27,14 +27,15 @@ devtools::install_github("chainsawriot/sehrnett")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+The most basic function is `get_lemmas`. It generates basic information
+about the lemmas you provided.
 
 ``` r
 library(sehrnett)
 ```
 
 ``` r
-search_lemma(c("very", "nice"))
+get_lemmas(c("very", "nice"))
 #> # A tibble: 10 × 6
 #>     synsetid lemma sensenum definition                          pos   lexdomain 
 #>        <int> <chr>    <int> <chr>                               <chr> <chr>     
@@ -51,7 +52,7 @@ search_lemma(c("very", "nice"))
 ```
 
 ``` r
-search_lemma("nice")
+get_lemmas("nice")
 #> # A tibble: 6 × 6
 #>    synsetid lemma sensenum definition                           pos   lexdomain 
 #>       <int> <chr>    <int> <chr>                                <chr> <chr>     
@@ -64,7 +65,7 @@ search_lemma("nice")
 ```
 
 ``` r
-search_lemma("nice", pos = "n")
+get_lemmas("nice", pos = "n")
 #> # A tibble: 1 × 6
 #>    synsetid lemma sensenum definition                           pos   lexdomain 
 #>       <int> <chr>    <int> <chr>                                <chr> <chr>     
@@ -75,10 +76,10 @@ search_lemma("nice", pos = "n")
 
 For example, you want to know the synonyms of the word “nuance” (very
 important for academic writing). You can first search using the lemma
-“nuance” with `search_lemma`.
+“nuance” with `get_lemmas`.
 
 ``` r
-res <- search_lemma("nuance")
+res <- get_lemmas("nuance")
 res
 #> # A tibble: 1 × 6
 #>    synsetid lemma  sensenum definition                       pos   lexdomain    
@@ -92,8 +93,8 @@ then search for the `synsetid` (cognitive synonym identifier) of that
 word sense.
 
 ``` r
-# search_synonym() is a wrapper to search_synsetid
-search_synsetid(res$synsetid[1])
+# get_synonyms() is a wrapper to search_synsetid
+get_synsetids(res$synsetid[1])
 #> # A tibble: 5 × 6
 #>    synsetid lemma      sensenum definition                    pos   lexdomain   
 #>       <int> <chr>         <int> <chr>                         <chr> <chr>       
@@ -110,7 +111,7 @@ All `search_` functions are chainable by using the magrittr pipe
 operator.
 
 ``` r
-c("switch off") %>% search_lemma(pos = "v") %>% search_synonym
+c("switch off") %>% get_lemmas(pos = "v") %>% get_synonyms
 #> # A tibble: 4 × 6
 #>    synsetid lemma      sensenum definition                      pos   lexdomain 
 #>       <int> <chr>         <int> <chr>                           <chr> <chr>     
