@@ -61,7 +61,7 @@ res
 There could be multiple word senses and you need to choose which word sense you want to convey. But in this case, there is only one. You can then search for the `synsetid` (cognitive synonym identifier) of that word sense.
 
 ```{r}
-# get_synonyms() is a wrapper to search_synsetid
+# get_synonyms() is a wrapper to get_synsetids
 get_synsetids(res$synsetid[1])
 ```
 

@@ -93,7 +93,7 @@ then search for the `synsetid` (cognitive synonym identifier) of that
 word sense.
 
 ``` r
-# get_synonyms() is a wrapper to search_synsetid
+# get_synonyms() is a wrapper to get_synsetids
 get_synsetids(res$synsetid[1])
 #> # A tibble: 5 × 6
 #>    synsetid lemma      sensenum definition                    pos   lexdomain   
@@ -107,8 +107,7 @@ get_synsetids(res$synsetid[1])
 
 ## Chainablilty
 
-All `search_` functions are chainable by using the magrittr pipe
-operator.
+All `get_` functions are chainable by using the magrittr pipe operator.
 
 ``` r
 c("switch off") %>% get_lemmas(pos = "v") %>% get_synonyms
