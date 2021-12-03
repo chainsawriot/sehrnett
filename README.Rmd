@@ -49,6 +49,12 @@ get_lemmas("nice")
 get_lemmas("nice", pos = "n")
 ```
 
+Please note that some definitions in WordNet are considered pejorative or offensive, e.g. 
+
+```{r}
+get_lemmas("dog")
+```
+
 ## A practical example
 
 For example, you want to know the synonyms of the word "nuance" (very important for academic writing). You can first search using the lemma "nuance" with `get_lemmas`.
@@ -71,4 +77,33 @@ All `get_` functions are chainable by using the magrittr pipe operator.
 
 ```{r}
 c("switch off") %>% get_lemmas(pos = "v") %>% get_synonyms
+```
+
+## `get_outdegrees` and its sugars
+
+WordNet is indeed a network. synsetids are connected to each other in a directed graph. An edge (a synsetid) is linked to another with different link (edge) types labelling with different `linkid`s. You can look at all available `linkid`s with the function `get_linktypes`.
+
+```{r}
+get_linktypes()
+```
+
+You can find all outdegrees to synsetids using the `get_outdegrees` function.
+
+```{r}
+## all hypernyms
+get_lemmas("dog", sensenum = 1) %>% get_outdegrees(linkid = 1)
+```
+
+```{r}
+## all hyponymes
+get_lemmas("dog", sensenum = 1) %>% get_outdegrees(linkid = 2)
+```
+
+Please note that it is not possible to obtain antonyms (linkid = 30) using this method.
+
+`sehrnett` provides several syntactic sugars as `get_` functions. For example:
+
+```{r}
+## all hyponymes
+get_lemmas("dog", sensenum = 1) %>% get_hyponyms()
 ```

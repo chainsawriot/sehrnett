@@ -4,12 +4,14 @@
 \alias{get_lemmas}
 \title{Search For Lemmas in WordNet}
 \usage{
-get_lemmas(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"))
+get_lemmas(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"), sensenum)
 }
 \arguments{
 \item{x}{character, one or more lemmas to be searched}
 
 \item{pos}{character, a vector of part-of-speech labels: "n": Noun, "v": Verb, "a": Adjective, "s": Adjective satellite, "r": Adverb}
+
+\item{sensenum}{integer, if supplied, only those sensenum are selected.}
 }
 \value{
 a data frame containing search result
