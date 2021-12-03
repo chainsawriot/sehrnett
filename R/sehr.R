@@ -95,10 +95,21 @@ get_hyponyms <- function(x) {
     get_outdegrees(x, linkid = c(2, 4))
 }
 
+ 
+#' @rdname get_outdegrees
+#' @export
+get_holonyms <- function(x) {
+    get_outdegrees(x, linkid = c(11, 13, 15))
+}
+
+#' @rdname get_outdegrees
+#' @export
+get_meronyms <- function(x) {
+    get_outdegrees(x, linkid = c(12, 14, 16))    
+}
 
 #' @rdname get_outdegrees
 #' @export
 get_linktypes <- function() {
     DBI::dbGetQuery(nett_con, "select * from linktypes order by linkid")
 }
-

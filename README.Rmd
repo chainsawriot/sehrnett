@@ -87,23 +87,22 @@ WordNet is indeed a network. synsetids are connected to each other in a directed
 get_linktypes()
 ```
 
-You can find all outdegrees to synsetids using the `get_outdegrees` function.
+You can find all outdegrees to synsetids using the `get_outdegrees` function. Please note that it is possible to obtain most of the outdegrees, except `linkid`s 30 (antonym), 80 (pertainym), 81 (derivation), and 96 (domain member usage).
 
 ```{r}
 ## all hypernyms
-get_lemmas("dog", sensenum = 1) %>% get_outdegrees(linkid = 1)
+get_lemmas("dog", pos = "n", sensenum = 1) %>% get_outdegrees(linkid = 1)
 ```
 
 ```{r}
 ## all hyponymes
-get_lemmas("dog", sensenum = 1) %>% get_outdegrees(linkid = 2)
+get_lemmas("dog", pos = "n", sensenum = 1) %>% get_outdegrees(linkid = 2)
 ```
 
-Please note that it is not possible to obtain antonyms (linkid = 30) using this method.
 
 `sehrnett` provides several syntactic sugars as `get_` functions. For example:
 
 ```{r}
 ## all hyponymes
-get_lemmas("dog", sensenum = 1) %>% get_hyponyms()
+get_lemmas("dog", pos = "n", sensenum = 1) %>% get_hyponyms()
 ```

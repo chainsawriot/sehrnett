@@ -179,26 +179,26 @@ get_linktypes()
 ```
 
 You can find all outdegrees to synsetids using the `get_outdegrees`
-function.
+function. Please note that it is possible to obtain most of the
+outdegrees, except `linkid`s 30 (antonym), 80 (pertainym), 81
+(derivation), and 96 (domain member usage).
 
 ``` r
 ## all hypernyms
-get_lemmas("dog", sensenum = 1) %>% get_outdegrees(linkid = 1)
-#> # A tibble: 6 × 6
+get_lemmas("dog", pos = "n", sensenum = 1) %>% get_outdegrees(linkid = 1)
+#> # A tibble: 4 × 6
 #>    synsetid lemma               sensenum definition              pos   lexdomain
 #>       <int> <chr>                  <int> <chr>                   <chr> <chr>    
 #> 1 102085998 canid                      1 any of various fissipe… n     noun.ani…
 #> 2 102085998 canine                     2 any of various fissipe… n     noun.ani…
 #> 3 101320032 domestic animal            1 any of various animals… n     noun.ani…
 #> 4 101320032 domesticated animal        1 any of various animals… n     noun.ani…
-#> 5 202004900 follow                    22 follow in or as if in … v     verb.mot…
-#> 6 202004900 pursue                     2 follow in or as if in … v     verb.mot…
 ```
 
 ``` r
 ## all hyponymes
-get_lemmas("dog", sensenum = 1) %>% get_outdegrees(linkid = 2)
-#> # A tibble: 39 × 6
+get_lemmas("dog", pos = "n", sensenum = 1) %>% get_outdegrees(linkid = 2)
+#> # A tibble: 33 × 6
 #>     synsetid lemma            sensenum definition                pos   lexdomain
 #>        <int> <chr>               <int> <chr>                     <chr> <chr>    
 #>  1 102087384 barker                  2 informal terms for dogs   n     noun.ani…
@@ -211,19 +211,16 @@ get_lemmas("dog", sensenum = 1) %>% get_outdegrees(linkid = 2)
 #>  8 102115478 corgi                   1 either of two Welsh bree… n     noun.ani…
 #>  9 102087513 cur                     1 an inferior dog or one o… n     noun.ani…
 #> 10 102112993 dalmatian               2 a large breed having a s… n     noun.ani…
-#> # … with 29 more rows
+#> # … with 23 more rows
 ```
-
-Please note that it is not possible to obtain antonyms (linkid = 30)
-using this method.
 
 `sehrnett` provides several syntactic sugars as `get_` functions. For
 example:
 
 ``` r
 ## all hyponymes
-get_lemmas("dog", sensenum = 1) %>% get_hyponyms()
-#> # A tibble: 39 × 6
+get_lemmas("dog", pos = "n", sensenum = 1) %>% get_hyponyms()
+#> # A tibble: 33 × 6
 #>     synsetid lemma            sensenum definition                pos   lexdomain
 #>        <int> <chr>               <int> <chr>                     <chr> <chr>    
 #>  1 102087384 barker                  2 informal terms for dogs   n     noun.ani…
@@ -236,5 +233,5 @@ get_lemmas("dog", sensenum = 1) %>% get_hyponyms()
 #>  8 102115478 corgi                   1 either of two Welsh bree… n     noun.ani…
 #>  9 102087513 cur                     1 an inferior dog or one o… n     noun.ani…
 #> 10 102112993 dalmatian               2 a large breed having a s… n     noun.ani…
-#> # … with 29 more rows
+#> # … with 23 more rows
 ```
