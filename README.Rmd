@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 devtools::load_all()
 ```
 
-# sehrnett
+# sehrnett <img src="man/figures/sehrnett_logo.svg" align="right" height="200" />
 
 <!-- badges: start -->
 <!-- badges: end -->
