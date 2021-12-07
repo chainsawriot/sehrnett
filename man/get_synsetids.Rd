@@ -10,7 +10,7 @@ get_synsetids(x = c("301590922", "108957024"))
 get_synonyms(x)
 }
 \arguments{
-\item{x}{character, one or more Synset IDs to be searched}
+\item{x}{character, one or more Synset IDs to be searched, or a data.frame result from another \code{get_} function}
 }
 \value{
 a data frame containing search result

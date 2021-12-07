@@ -7,7 +7,7 @@
 get_lemmas(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"), sensenum)
 }
 \arguments{
-\item{x}{character, one or more lemmas to be searched}
+\item{x}{character, one or more lemmas to be searched; it can also be a data.frame result from another \code{get_} functions, but it doesn't make a lot of sense.}
 
 \item{pos}{character, a vector of part-of-speech labels: "n": Noun, "v": Verb, "a": Adjective, "s": Adjective satellite, "r": Adverb}
 

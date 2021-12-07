@@ -19,13 +19,13 @@ nett_con <- NULL
     output <- tibble::as_tibble(DBI::dbFetch(res))
     DBI::dbClearResult(res)
     class(output) <- append("sehrnett", class(output))
-    return(output)
+    return(unique(output))
 }
 
 #' Search for Synset IDs in WordNet
 #'
 #' Search for Synset ID(s) in WordNet
-#' @param x character, one or more Synset IDs to be searched
+#' @param x character, one or more Synset IDs to be searched, or a data.frame result from another `get_` function
 #' @return a data frame containing search result
 #' @export
 get_synsetids <- function(x = c("301590922", "108957024")) {
@@ -48,7 +48,7 @@ get_synonyms <- function(x) {
 #' Search For Lemmas in WordNet
 #'
 #' Search for lemma(s) in WordNet.
-#' @param x character, one or more lemmas to be searched
+#' @param x character, one or more lemmas to be searched; it can also be a data.frame result from another `get_` functions, but it doesn't make a lot of sense.
 #' @param pos character, a vector of part-of-speech labels: "n": Noun, "v": Verb, "a": Adjective, "s": Adjective satellite, "r": Adverb
 #' @param sensenum integer, if supplied, only those sensenum are selected.
 #' @return a data frame containing search result
@@ -72,9 +72,16 @@ get_lemmas <- function(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"), 
     return(output)
 }
 
-
+#' Get outdegrees
+#'
+#' Search for outdegrees based on linkid.
+#' @inheritParams get_synsetids
+#' @param linkid a vector of numeric linkids. Use [list_linktypes()] to obtain a full list.
 #' @export
 get_outdegrees <- function(x, linkid = 1) {
+    if (linkid %in% c(30, 80, 81, 96)) {
+        return(.get_sls_outdegrees(x = x, linkid = linkid))
+    }
     if ("sehrnett" %in% class(x)) {
         synsetid <- unique(x$synsetid)
     } else {
@@ -85,17 +92,18 @@ get_outdegrees <- function(x, linkid = 1) {
     .fetch_q(q, params)
 }
 
+#' @rdname get_outdegrees
 #' @export
 get_hypernyms <- function(x) {
     get_outdegrees(x, linkid = c(1, 3))
 }
 
+#' @rdname get_outdegrees
 #' @export
 get_hyponyms <- function(x) {
     get_outdegrees(x, linkid = c(2, 4))
 }
 
- 
 #' @rdname get_outdegrees
 #' @export
 get_holonyms <- function(x) {
@@ -105,11 +113,48 @@ get_holonyms <- function(x) {
 #' @rdname get_outdegrees
 #' @export
 get_meronyms <- function(x) {
-    get_outdegrees(x, linkid = c(12, 14, 16))    
+    get_outdegrees(x, linkid = c(12, 14, 16))
 }
 
 #' @rdname get_outdegrees
 #' @export
-get_linktypes <- function() {
+get_causes <- function(x) {
+    get_outdegrees(x, linkid = 23)
+}
+
+.get_sls_outdegrees <- function(x, linkid) {
+    if (! "sehrnett" %in% class(x)) {
+        stop("For this query, the input `x` must be a result from a get_* function.", call. = FALSE)
+    }
+    if (length(linkid) > 1) {
+        stop("For this query, linkid can only have exactly 1 element.", call. = FALSE)
+    }
+    subx <- unique(x[, c("synsetid", "lemma")])
+    q <- "SELECT l.dsynsetid as synsetid, dw.lemma AS lemma, l.dsensenum as sensenum, l.ddefinition as definition, l.dpos as pos, lex.lexdomainname as lexdomain FROM sensesXlexlinksXsenses AS l LEFT JOIN words AS sw ON l.swordid = sw.wordid LEFT JOIN words AS dw ON l.dwordid = dw.wordid LEFT JOIN lexdomains AS lex ON lex.lexdomainid = l.dlexdomainid WHERE sw.lemma = $slemma AND l.ssynsetid = $ssynsetid AND linkid = $linkid ORDER BY ssensenum"
+    params <- .eg(ssynsetid = subx$synsetid, slemma = subx$lemma, linkid = linkid)
+    .fetch_q(q, params)
+}
+
+#' @rdname get_outdegrees
+#' @export
+get_antonyms <- function(x) {
+    get_outdegrees(x, linkid = 30)
+}
+
+#' @rdname get_outdegrees
+#' @export
+get_derivatives <- function(x) {
+    get_outdegrees(x, linkid = 81)
+}
+
+#' @rdname get_outdegrees
+#' @export
+get_pertainyms <- function(x) {
+    get_outdegrees(x, linkid = 80)
+}
+
+#' @rdname get_outdegrees
+#' @export
+list_linktypes <- function() {
     DBI::dbGetQuery(nett_con, "select * from linktypes order by linkid")
 }

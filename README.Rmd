@@ -79,15 +79,13 @@ All `get_` functions are chainable by using the magrittr pipe operator.
 c("switch off") %>% get_lemmas(pos = "v") %>% get_synonyms
 ```
 
-## `get_outdegrees` and its sugars
+## `get_outdegrees`
 
-WordNet is indeed a network. synsetids are connected to each other in a directed graph. An edge (a synsetid) is linked to another with different link (edge) types labelling with different `linkid`s. You can look at all available `linkid`s with the function `get_linktypes`.
+WordNet is indeed a network. synsetids are connected to each other in a directed graph. An node (a synsetid) is linked to another with different link (edge) types labelling with different `linkid`s. You can list out all available `linkid`s with the function `list_linktypes`.
 
 ```{r}
-get_linktypes()
+list_linktypes()
 ```
-
-You can find all outdegrees to synsetids using the `get_outdegrees` function. Please note that it is possible to obtain most of the outdegrees, except `linkid`s 30 (antonym), 80 (pertainym), 81 (derivation), and 96 (domain member usage).
 
 ```{r}
 ## all hypernyms
@@ -99,6 +97,12 @@ get_lemmas("dog", pos = "n", sensenum = 1) %>% get_outdegrees(linkid = 1)
 get_lemmas("dog", pos = "n", sensenum = 1) %>% get_outdegrees(linkid = 2)
 ```
 
+```{r}
+## all antonyms
+get_lemmas("nice", pos = "a", sensenum = 1) %>% get_outdegrees(linkid = 30)
+```
+
+### Sugars
 
 `sehrnett` provides several syntactic sugars as `get_` functions. For example:
 
@@ -106,3 +110,12 @@ get_lemmas("dog", pos = "n", sensenum = 1) %>% get_outdegrees(linkid = 2)
 ## all hyponymes
 get_lemmas("dog", pos = "n", sensenum = 1) %>% get_hyponyms()
 ```
+
+```{r}
+get_lemmas("nice", pos = "a", sensenum = 1) %>% get_antonyms()
+```
+
+```{r}
+get_lemmas("nice", pos = "a", sensenum = 1) %>% get_derivatives()
+```
+

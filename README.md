@@ -138,15 +138,15 @@ c("switch off") %>% get_lemmas(pos = "v") %>% get_synonyms
 #> 4 201513208 cut              27 cause to stop operating by dis… v     verb.cont…
 ```
 
-## `get_outdegrees` and its sugars
+## `get_outdegrees`
 
 WordNet is indeed a network. synsetids are connected to each other in a
-directed graph. An edge (a synsetid) is linked to another with different
-link (edge) types labelling with different `linkid`s. You can look at
-all available `linkid`s with the function `get_linktypes`.
+directed graph. An node (a synsetid) is linked to another with different
+link (edge) types labelling with different `linkid`s. You can list out
+all available `linkid`s with the function `list_linktypes`.
 
 ``` r
-get_linktypes()
+list_linktypes()
 #>    linkid                   link recurses
 #> 1       1               hypernym        1
 #> 2       2                hyponym        1
@@ -177,11 +177,6 @@ get_linktypes()
 #> 27     97                 domain        0
 #> 28     98                 member        0
 ```
-
-You can find all outdegrees to synsetids using the `get_outdegrees`
-function. Please note that it is possible to obtain most of the
-outdegrees, except `linkid`s 30 (antonym), 80 (pertainym), 81
-(derivation), and 96 (domain member usage).
 
 ``` r
 ## all hypernyms
@@ -214,12 +209,25 @@ get_lemmas("dog", pos = "n", sensenum = 1) %>% get_outdegrees(linkid = 2)
 #> # … with 23 more rows
 ```
 
+``` r
+## all antonyms
+get_lemmas("nice", pos = "a", sensenum = 1) %>% get_outdegrees(linkid = 30)
+#> # A tibble: 1 × 6
+#>    synsetid lemma sensenum definition                            pos   lexdomain
+#>       <int> <chr>    <int> <chr>                                 <chr> <chr>    
+#> 1 301591485 nasty        1 offensive or even (of persons) malic… a     adj.all
+```
+
+### Sugars
+
 `sehrnett` provides several syntactic sugars as `get_` functions. For
 example:
 
 ``` r
 ## all hyponymes
 get_lemmas("dog", pos = "n", sensenum = 1) %>% get_hyponyms()
+#> Warning in if (linkid %in% c(30, 80, 81, 96)) {: the condition has length > 1
+#> and only the first element will be used
 #> # A tibble: 33 × 6
 #>     synsetid lemma            sensenum definition                pos   lexdomain
 #>        <int> <chr>               <int> <chr>                     <chr> <chr>    
@@ -234,4 +242,20 @@ get_lemmas("dog", pos = "n", sensenum = 1) %>% get_hyponyms()
 #>  9 102087513 cur                     1 an inferior dog or one o… n     noun.ani…
 #> 10 102112993 dalmatian               2 a large breed having a s… n     noun.ani…
 #> # … with 23 more rows
+```
+
+``` r
+get_lemmas("nice", pos = "a", sensenum = 1) %>% get_antonyms()
+#> # A tibble: 1 × 6
+#>    synsetid lemma sensenum definition                            pos   lexdomain
+#>       <int> <chr>    <int> <chr>                                 <chr> <chr>    
+#> 1 301591485 nasty        1 offensive or even (of persons) malic… a     adj.all
+```
+
+``` r
+get_lemmas("nice", pos = "a", sensenum = 1) %>% get_derivatives()
+#> # A tibble: 1 × 6
+#>    synsetid lemma    sensenum definition          pos   lexdomain     
+#>       <int> <chr>       <int> <chr>               <chr> <chr>         
+#> 1 104786760 niceness        2 the quality of nice n     noun.attribute
 ```
