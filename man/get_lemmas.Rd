@@ -4,7 +4,12 @@
 \alias{get_lemmas}
 \title{Search For Lemmas in WordNet}
 \usage{
-get_lemmas(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"), sensenum)
+get_lemmas(
+  x = c("very", "nice"),
+  pos = c("n", "v", "a", "s", "r"),
+  sensenum,
+  lemmatize = TRUE
+)
 }
 \arguments{
 \item{x}{character, one or more lemmas to be searched; it can also be a data.frame result from another \code{get_} functions, but it doesn't make a lot of sense.}
@@ -12,6 +17,8 @@ get_lemmas(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"), sensenum)
 \item{pos}{character, a vector of part-of-speech labels: "n": Noun, "v": Verb, "a": Adjective, "s": Adjective satellite, "r": Adverb}
 
 \item{sensenum}{integer, if supplied, only those sensenum are selected.}
+
+\item{lemmatize}{logical, whether to lemmatize the \code{x} before making query. This is ignored if 1) \code{pos} has more than one element, 2) \code{x} contains collocations or hyphenation.}
 }
 \value{
 a data frame containing search result

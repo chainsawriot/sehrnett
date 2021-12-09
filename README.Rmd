@@ -19,7 +19,7 @@ devtools::load_all()
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of sehrnett is to provide a nice (and fast) interface to [Princeton's WordNet](https://wordnet.princeton.edu/). Unlike the original [wordnet package](https://cran.r-project.org/web/packages/wordnet/index.html) (Feinerer et al., 2020), you don't need to install WordNet and / or setup rJava.
+The goal of sehrnett is to provide a nice (and fast) interface to [Princeton's WordNet](https://wordnet.princeton.edu/). Unlike the original [wordnet package](https://cran.r-project.org/package=wordnet) (Feinerer et al., 2020), you don't need to install WordNet and / or setup rJava.
 
 The data is not included in the package. The package will download the data (~100M Zipped, ~400M Unzipped) from the Internet, if such data is not available. Please make sure you agree with the [WordNet License](https://wordnet.princeton.edu/license-and-commercial-use).
 
@@ -29,9 +29,9 @@ The data is not included in the package. The package will download the data (~10
 devtools::install_github("chainsawriot/sehrnett")
 ```
 
-## Example
+## `get_lemmas`
 
-The most basic function is `get_lemmas`. It generates basic information about the lemmas you provided.
+The most basic function is `get_lemmas`. It generates basic information about the lemmas [^1] you provided.
 
 ```r
 library(sehrnett)
@@ -54,6 +54,25 @@ Please note that some definitions in WordNet are considered pejorative or offens
 ```{r}
 get_lemmas("dog")
 ```
+
+### Lemmatization
+
+The [morphological processing](https://wordnet.princeton.edu/documentation/morphy7wn) of the original Wordnet is partially implemented in `sehrnett` [^2]. As the Wordnet's database contains only information about lemmas (e.g. *eat*), you need to convert inflected variants (e.g. *ate*, *eaten*, *eating*) back to their lemmas to query them. The process is otherwise known as [lemmatization](https://en.wikipedia.org/wiki/Lemmatisation).
+
+`sehrnett` provides such lemmatization. But you need to provide exactly one `pos` and set `lemmatize` to `TRUE` (default).
+
+```{r}
+get_lemmas(c("ate", "ducking"), pos = "v")
+```
+
+```{r}
+get_lemmas(c("loci", "lemmata", "boxesful"), pos = "n")
+```
+
+```{r}
+get_lemmas(c("nicest", "stronger"), pos = "a")
+```
+
 
 ## A practical example
 
@@ -119,3 +138,8 @@ get_lemmas("nice", pos = "a", sensenum = 1) %>% get_antonyms()
 get_lemmas("nice", pos = "a", sensenum = 1) %>% get_derivatives()
 ```
 
+---
+
+[^1]: Yes, the plural of *lemma* can also be *lemmata*, you Latin-speaking people. 
+
+[^2]: Like many implementations (e.g. NLTK, Ruby's rwordnet and node-wordnet-magic), the morpological processing is only partial. Collocations and hyphenation are not supported. Therefore, please don't expect that lemmatizing *asking for it* would obtain *ask for it* (as documented in Wordnet's website).

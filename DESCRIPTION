@@ -1,13 +1,13 @@
 Package: sehrnett
-Title: A Nice Interface To WordNet
-Version: 0.0.1
+Title: A Nice Interface to WordNet
+Version: 0.0.2
 Authors@R: 
     person(given = "Chung-hong",
            family = "Chan",
            role = c("aut", "cre"),
            email = "chainsawtiney@gmail.com",
            comment = c(ORCID = "0000-0002-6232-7530"))
-Description: A nice interface to Princeton\'s WordNet without rJava dependency. WordNet data is not included but a function is provided to download such data automatically.
+Description: A nice interface to Princeton\'s WordNet without rJava dependency. WordNet data is not included but a function is provided to download such data automatically. Please note that WordNet(R) is a registered tradename. Princeton University makes WordNet available to research and commercial users free of charge provided the terms of their license (<https://wordnet.princeton.edu/license-and-commercial-use>) are followed, and proper reference is made to the project using an appropriate citation (<https://wordnet.princeton.edu/citing-wordnet>).
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
@@ -20,4 +20,6 @@ Imports:
     DBI,
     RSQLite,
     magrittr,
-    tibble
+    tibble,
+    purrr,
+    utils
