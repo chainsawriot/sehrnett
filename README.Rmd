@@ -17,6 +17,8 @@ devtools::load_all()
 # sehrnett <img src="man/figures/sehrnett_logo.svg" align="right" height="200" />
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/chainsawriot/sehrnett/workflows/R-CMD-check/badge.svg)](https://github.com/chainsawriot/sehrnett/actions)
+[![Codecov test coverage](https://codecov.io/gh/chainsawriot/sehrnett/branch/master/graph/badge.svg)](https://app.codecov.io/gh/chainsawriot/sehrnett?branch=master)
 <!-- badges: end -->
 
 The goal of sehrnett is to provide a nice (and fast) interface to [Princeton's WordNet](https://wordnet.princeton.edu/). Unlike the original [wordnet package](https://cran.r-project.org/package=wordnet) (Feinerer et al., 2020), you don't need to install WordNet and / or setup rJava.

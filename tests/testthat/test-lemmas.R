@@ -1,0 +1,47 @@
+test_that("basic default", {
+    x <- get_lemmas("dog")
+    expect_true("sehrnett" %in% class(x))
+    expect_true("tbl_df" %in% class(x))
+    expect_equal(nrow(x), 8)
+    expect_equal(ncol(x), 6)
+    expect_equal(colnames(x), c("synsetid", "lemma", "sensenum", "definition", "pos", "lexdomain"))
+})
+
+test_that("basic: character vector", {
+    x <- get_lemmas(c("dog", "cat", "deer", "katze"))
+    expect_true("sehrnett" %in% class(x))
+    expect_true("tbl_df" %in% class(x))
+    expect_true("dog" %in% x$lemma)
+    expect_true("cat" %in% x$lemma)
+    expect_true("deer" %in% x$lemma)
+    expect_false("katze" %in% x$lemma)
+})
+
+test_that("basic: character vector", {
+    x <- get_lemmas(c("dog", "cat", "deer", "katze"), pos = "n")
+    expect_true("sehrnett" %in% class(x))
+    expect_true("tbl_df" %in% class(x))
+    expect_true("dog" %in% x$lemma)
+    expect_true("cat" %in% x$lemma)
+    expect_true("deer" %in% x$lemma)
+    expect_false("katze" %in% x$lemma)
+    expect_true("n" %in% x$pos)
+    expect_equal(length(unique(x$pos)), 1)
+    x <- get_lemmas(c("dog", "cat", "deer", "katze"), pos = c("n", "v"))
+    expect_true("n" %in% x$pos)
+    expect_true("v" %in% x$pos)
+    expect_equal(length(unique(x$pos)), 2)
+    x <- get_lemmas(c("dog", "cat", "deer", "katze"), pos = c("n", "v"), sensenum = 1)
+    expect_equal(length(unique(x$sensenum)), 1)
+    x <- get_lemmas(c("dog", "cat", "deer", "katze"), pos = "n")
+    y <- get_lemmas(c("DOG", "cat", "DeER", "kAtze"), pos = "n")
+    expect_true(all.equal(x, y))
+})
+
+test_that("sehrnett input", {
+    x <- get_lemmas(c("dog", "cat", "deer", "katze"), pos = "n")
+    y <- get_lemmas(x, pos = "v")
+    expect_true("v" %in% y$pos)
+    expect_equal(length(unique(y$pos)), 1)
+})
+

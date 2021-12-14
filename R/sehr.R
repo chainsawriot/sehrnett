@@ -1,7 +1,7 @@
 nett_con <- NULL
 .onLoad <- function(libname, pkgname) {
     .download()
-    nett_con <<- DBI::dbConnect(RSQLite::SQLite(), system.file("sqlite-31.db", package = "sehrnett"))
+    nett_con <<- .create_con()
 }
 
 .onUnload <- function(libname, pkgname) {
@@ -62,7 +62,7 @@ get_lemmas <- function(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"), 
         lemma <- unique(x$lemma)
         lemmatize <- FALSE
     } else {
-        lemma <- x
+        lemma <- tolower(x)
     }
     if (length(pos) > 1) {
         lemmatize <- FALSE
@@ -90,7 +90,7 @@ get_lemmas <- function(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"), 
 #' @param linkid a vector of numeric linkids. Use [list_linktypes()] to obtain a full list.
 #' @export
 get_outdegrees <- function(x, linkid = 1) {
-    if (linkid %in% c(30, 80, 81, 96)) {
+    if (any(purrr::map_lgl(linkid, ~. %in% c(30, 80, 81, 96)))) {
         return(.get_sls_outdegrees(x = x, linkid = linkid))
     }
     if ("sehrnett" %in% class(x)) {

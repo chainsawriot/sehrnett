@@ -3,3 +3,5 @@
 ^LICENSE\.md$
 ^inst/sqlite-31\.db$
 ^\.gitignore$
+^\.github$
+^codecov\.yml$

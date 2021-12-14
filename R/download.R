@@ -11,3 +11,16 @@
     unlink(temploc)
     invisible(TRUE)
 }
+
+.delete <- function() {
+    if (!file.exists(system.file("sqlite-31.db", package = "sehrnett"))) {
+        return(invisible(FALSE))
+    }
+    unlink(system.file("sqlite-31.db", package = "sehrnett"))
+    return(invisible(TRUE))
+}
+
+.create_con <- function() {
+    .download()
+    return(DBI::dbConnect(RSQLite::SQLite(), system.file("sqlite-31.db", package = "sehrnett")))
+}

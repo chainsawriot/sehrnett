@@ -287,8 +287,6 @@ example:
 ``` r
 ## all hyponymes
 get_lemmas("dog", pos = "n", sensenum = 1) %>% get_hyponyms()
-#> Warning in if (linkid %in% c(30, 80, 81, 96)) {: the condition has length > 1
-#> and only the first element will be used
 #> # A tibble: 35 × 6
 #>     synsetid lemma            sensenum definition                pos   lexdomain
 #>        <int> <chr>               <int> <chr>                     <chr> <chr>    

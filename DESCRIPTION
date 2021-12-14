@@ -1,5 +1,5 @@
 Package: sehrnett
-Title: A Nice Interface to WordNet
+Title: A Very Nice Interface to WordNet
 Version: 0.0.2
 Authors@R: 
     person(given = "Chung-hong",
@@ -7,13 +7,14 @@ Authors@R:
            role = c("aut", "cre"),
            email = "chainsawtiney@gmail.com",
            comment = c(ORCID = "0000-0002-6232-7530"))
-Description: A nice interface to Princeton\'s WordNet without rJava dependency. WordNet data is not included but a function is provided to download such data automatically. Please note that WordNet(R) is a registered tradename. Princeton University makes WordNet available to research and commercial users free of charge provided the terms of their license (<https://wordnet.princeton.edu/license-and-commercial-use>) are followed, and proper reference is made to the project using an appropriate citation (<https://wordnet.princeton.edu/citing-wordnet>).
+Description: A very nice interface to Princeton\'s WordNet without rJava dependency. WordNet data is not included. Please note that WordNet(R) is a registered tradename. Princeton University makes WordNet available to research and commercial users free of charge provided the terms of their license (<https://wordnet.princeton.edu/license-and-commercial-use>) are followed, and proper reference is made to the project using an appropriate citation (<https://wordnet.princeton.edu/citing-wordnet>).
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Suggests: 
+    covr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
@@ -22,4 +23,6 @@ Imports:
     magrittr,
     tibble,
     purrr,
-    utils
+    utils,
+    dplyr
+Config/testthat/parallel: true
