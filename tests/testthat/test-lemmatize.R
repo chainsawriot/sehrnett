@@ -10,7 +10,10 @@ test_that("lemmatize", {
     expect_equal(nrow(x1), 0)
     x1 <- get_lemmas(c("cars", "dogs"), pos = "n")
     expect_true("car" %in% x1$lemma)
-    expect_true("dog" %in% x1$lemma)    
+    expect_true("dog" %in% x1$lemma)
+    ## adverb will just return the same thing
+    x3 <- get_lemmas("greatly", "r", lemmatize = TRUE)
+    expect_true("greatly" %in% x3$lemma)
 })
 
 test_that("Test cases from node wordnet magic", {

@@ -5,6 +5,7 @@ test_that("basic default", {
     expect_equal(nrow(x), 8)
     expect_equal(ncol(x), 6)
     expect_equal(colnames(x), c("synsetid", "lemma", "sensenum", "definition", "pos", "lexdomain"))
+    expect_error(x <- get_lemmas("dog", pos = "x"))
 })
 
 test_that("basic: character vector", {
