@@ -92,6 +92,20 @@ get_lemmas("dog")
 #> 8 202005890 dog          1 go after with the intent to catch    v     verb.moti…
 ```
 
+### Dot notation
+
+The dot notation (“lemma.pos.sensenum”) can be used to quick search for
+a particular word sense. For example, one can search for “king.n.10” to
+quickly pin down the word sense of “king” as a chess piece.
+
+``` r
+get_lemmas("king.n.10")
+#> # A tibble: 1 × 6
+#>    synsetid lemma sensenum definition                          pos   lexdomain  
+#>       <int> <chr>    <int> <chr>                               <chr> <chr>      
+#> 1 103623310 king        10 (chess) the weakest but the most i… n     noun.artif…
+```
+
 ### Lemmatization
 
 The [morphological

@@ -57,6 +57,14 @@ Please note that some definitions in WordNet are considered pejorative or offens
 get_lemmas("dog")
 ```
 
+### Dot notation
+
+The dot notation ("lemma.pos.sensenum") can be used to quick search for a particular word sense. For example, one can search for "king.n.10" to quickly pin down the word sense of "king" as a chess piece.
+
+```{r}
+get_lemmas("king.n.10")
+```
+
 ### Lemmatization
 
 The [morphological processing](https://wordnet.princeton.edu/documentation/morphy7wn) of the original Wordnet is partially implemented in `sehrnett` [^2]. As the Wordnet's database contains only information about lemmas (e.g. *eat*), you need to convert inflected variants (e.g. *ate*, *eaten*, *eating*) back to their lemmas to query them. The process is otherwise known as [lemmatization](https://en.wikipedia.org/wiki/Lemmatisation).

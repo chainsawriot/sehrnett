@@ -25,6 +25,13 @@ test_that("readme: dog", {
     expect_true(any(grepl("informal term for a man", x$definition)))
 })
 
+test_that("readme: king.n.10", {
+    x <- get_lemmas("king.n.10")
+    expect_true("sehrnett" %in% class(x))
+    expect_equal(nrow(x), 1)
+    expect_true(103623310 %in% x$synsetid)
+})
+
 test_that("lemma: ate ducking", {
     x <- get_lemmas(c("ate", "ducking"), pos = "v")
     expect_true("sehrnett" %in% class(x))
