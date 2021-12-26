@@ -1,3 +1,10 @@
+test_that("corner cases", {
+    expect_error(x <- get_lemmas(NA), NA)
+    expect_error(x <- get_lemmas(""), NA)
+    expect_error(x <- get_lemmas(c(NA, NA), NA))
+    expect_error(x <- get_lemmas(c("", "")), NA)
+})
+
 test_that("basic default", {
     x <- get_lemmas("dog")
     expect_true("sehrnett" %in% class(x))
@@ -37,6 +44,17 @@ test_that("basic: character vector", {
     x <- get_lemmas(c("dog", "cat", "deer", "katze"), pos = "n")
     y <- get_lemmas(c("DOG", "cat", "DeER", "kAtze"), pos = "n")
     expect_true(all.equal(x, y))
+})
+
+test_that("dot notation", {
+    x <- get_lemmas("king.n.10")
+    expect_true(103623310 %in% x$synsetid)
+    expect_error(get_lemmas(c("king.n.10", "queen")))
+    expect_error(get_lemmas(c("queen", "king.n.10")))
+    expect_error(x <- get_lemmas("ship.v"), NA)
+    expect_false("n" %in% x$pos)
+    expect_error(x <- get_lemmas("ship."), NA)
+    expect_true("n" %in% x$pos)    
 })
 
 test_that("sehrnett input", {

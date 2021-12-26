@@ -12,7 +12,7 @@ get_lemmas(
 )
 }
 \arguments{
-\item{x}{character, one or more lemmas to be searched; it can also be a data.frame result from another \code{get_} functions, but it doesn't make a lot of sense.}
+\item{x}{character, one or more lemmas to be searched; it can also be a data.frame result from another \code{get_} functions, but it doesn't make a lot of sense. Alternatively, you can also use the so-called dot notation ("lemma.pos.sensenum") to quickly search for an exact word sense. For example, "king.n.10" is the lemma of "king", which is a noun with the 10th word sense, i.e. king, the chess piece. When using this dot notation, the \code{lemmatize} parameter is set to \code{FALSE}.}
 
 \item{pos}{character, a vector of part-of-speech labels: "n": Noun, "v": Verb, "a": Adjective, "s": Adjective satellite, "r": Adverb}
 

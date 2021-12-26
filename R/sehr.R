@@ -48,13 +48,29 @@ get_synonyms <- function(x) {
 #' Search For Lemmas in WordNet
 #'
 #' Search for lemma(s) in WordNet.
-#' @param x character, one or more lemmas to be searched; it can also be a data.frame result from another `get_` functions, but it doesn't make a lot of sense.
+#' @param x character, one or more lemmas to be searched; it can also be a data.frame result from another `get_` functions, but it doesn't make a lot of sense. Alternatively, you can also use the so-called dot notation ("lemma.pos.sensenum") to quickly search for an exact word sense. For example, "king.n.10" is the lemma of "king", which is a noun with the 10th word sense, i.e. king, the chess piece. When using this dot notation, the `lemmatize` parameter is set to `FALSE`.
 #' @param pos character, a vector of part-of-speech labels: "n": Noun, "v": Verb, "a": Adjective, "s": Adjective satellite, "r": Adverb
 #' @param sensenum integer, if supplied, only those sensenum are selected.
 #' @param lemmatize logical, whether to lemmatize the `x` before making query. This is ignored if 1) `pos` has more than one element, 2) `x` contains collocations or hyphenation.
 #' @return a data frame containing search result
 #' @export
 get_lemmas <- function(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"), sensenum, lemmatize = TRUE) {
+    if (is.vector(x)) {
+        if (any(grepl("\\.", x))) {
+            if (length(x) != 1) {
+                stop("Can only support one query at a time with the dot notation.")
+            }
+            splitted_x <- strsplit(x, "\\.")[[1]]
+            x <- splitted_x[1]
+            if (length(splitted_x) >= 2) {
+                pos <- splitted_x[2]
+            }
+            if (length(splitted_x) == 3) {
+                sensenum <- splitted_x[3]
+            }
+            lemmatize <- FALSE
+        }
+    }
     if (any(!pos %in% c("n", "v", "a", "s", "r"))) {
         stop("Unknown pos.")
     }
