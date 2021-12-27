@@ -1,3 +1,5 @@
+#' @importFrom dplyr bind_rows
+
 nett_con <- NULL
 .onLoad <- function(libname, pkgname) {
     download_wordnet()
