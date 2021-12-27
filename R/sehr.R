@@ -1,6 +1,6 @@
 nett_con <- NULL
 .onLoad <- function(libname, pkgname) {
-    .download()
+    download_wordnet()
     nett_con <<- .create_con()
 }
 
