@@ -18,3 +18,10 @@ a data frame containing search result
 \description{
 Search for Synset ID(s) in WordNet
 }
+\examples{
+\donttest{
+if (interactive()) {
+  get_synsetids("106618544")
+}
+}
+}

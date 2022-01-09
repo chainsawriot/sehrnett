@@ -26,3 +26,10 @@ a data frame containing search result
 \description{
 Search for lemma(s) in WordNet.
 }
+\examples{
+\donttest{
+if (interactive()) {
+get_lemmas("king.n.10")
+}
+}
+}

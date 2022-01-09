@@ -28,8 +28,14 @@ nett_con <- NULL
 #'
 #' Search for Synset ID(s) in WordNet
 #' @param x character, one or more Synset IDs to be searched, or a data.frame result from another `get_` function
-#' @return a data frame containing search result
+#' @inherit get_lemmas return
 #' @export
+#' @examples
+#' \donttest{
+#' if (interactive()) {
+#'   get_synsetids("106618544")
+#' }
+#' }
 get_synsetids <- function(x = c("301590922", "108957024")) {
     if ("sehrnett" %in% class(x)) {
         synsetid <- unique(x$synsetid)
@@ -56,6 +62,12 @@ get_synonyms <- function(x) {
 #' @param lemmatize logical, whether to lemmatize the `x` before making query. This is ignored if 1) `pos` has more than one element, 2) `x` contains collocations or hyphenation.
 #' @return a data frame containing search result
 #' @export
+#' @examples
+#' \donttest{
+#' if (interactive()) {
+#' get_lemmas("king.n.10")
+#' }
+#' }
 get_lemmas <- function(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"), sensenum, lemmatize = TRUE) {
     if (is.vector(x)) {
         if (any(grepl("\\.", x))) {
@@ -103,10 +115,20 @@ get_lemmas <- function(x = c("very", "nice"), pos = c("n", "v", "a", "s", "r"), 
 
 #' Get outdegrees
 #'
-#' Search for outdegrees based on linkid.
+#' Search for outdegrees based on linkid. Various sugars are also provided with different default linkids.
+#' 
 #' @inheritParams get_synsetids
+#' @inherit get_lemmas return
 #' @param linkid a vector of numeric linkids. Use [list_linktypes()] to obtain a full list.
 #' @export
+#' @examples
+#' \donttest{
+#' if (interactive()) {
+#' get_lemmas("dog", pos = "n", sensenum = 1) %>% get_outdegrees(linkid = 1)
+#' get_lemmas("dog", pos = "n", sensenum = 1) %>% get_hyponyms()
+#' get_lemmas("nice", pos = "a", sensenum = 1) %>% get_antonyms()
+#' }
+#' }
 get_outdegrees <- function(x, linkid = 1) {
     if (any(purrr::map_lgl(linkid, ~. %in% c(30, 80, 81, 96)))) {
         return(.get_sls_outdegrees(x = x, linkid = linkid))

@@ -38,6 +38,18 @@ list_linktypes()
 
 \item{linkid}{a vector of numeric linkids. Use \code{\link[=list_linktypes]{list_linktypes()}} to obtain a full list.}
 }
+\value{
+a data frame containing search result
+}
 \description{
-Search for outdegrees based on linkid.
+Search for outdegrees based on linkid. Various sugars are also provided with different default linkids.
+}
+\examples{
+\donttest{
+if (interactive()) {
+get_lemmas("dog", pos = "n", sensenum = 1) \%>\% get_outdegrees(linkid = 1)
+get_lemmas("dog", pos = "n", sensenum = 1) \%>\% get_hyponyms()
+get_lemmas("nice", pos = "a", sensenum = 1) \%>\% get_antonyms()
+}
+}
 }
