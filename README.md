@@ -8,6 +8,8 @@
 [![R-CMD-check](https://github.com/chainsawriot/sehrnett/workflows/R-CMD-check/badge.svg)](https://github.com/chainsawriot/sehrnett/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/chainsawriot/sehrnett/branch/master/graph/badge.svg)](https://app.codecov.io/gh/chainsawriot/sehrnett?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/sehrnett)](https://CRAN.R-project.org/package=sehrnett)
 <!-- badges: end -->
 
 The goal of sehrnett is to provide a nice (and fast) interface to
