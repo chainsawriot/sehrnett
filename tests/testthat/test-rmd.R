@@ -1,5 +1,7 @@
 ## All examples in README
 
+skip_if_not(file.exists(system.file("sqlite-31.db", package = "sehrnett")))
+
 test_that("readme: very nice", {
     x <- get_lemmas(c("very", "nice"))
     expect_true("sehrnett" %in% class(x))

@@ -7,7 +7,9 @@ nett_con <- NULL
 }
 
 .onUnload <- function(libname, pkgname) {
-    DBI::dbDisconnect(nett_con)
+    if (!is.null(nett_con)) {
+        DBI::dbDisconnect(nett_con)
+    }
 }
 
 .eg <- function(...) {

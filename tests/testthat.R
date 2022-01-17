@@ -2,10 +2,12 @@ library(testthat)
 library(sehrnett)
 
 if (identical(Sys.getenv("NOT_CRAN", unset = "true"), "true")) {
-    sehrnett::download_wordnet(debug = TRUE)
-    test_check("sehrnett")
+    tryCatch({
+        sehrnett::download_wordnet(debug = TRUE)
+    }, error = function(e) {
+        message("Unable to download the database for testing. Skipping.")
+    })
+    if (file.exists(system.file("sqlite-31.db", package = "sehrnett"))){
+        test_check("sehrnett")
+    }
 }
-
-## recycle the test cases of node-wordnet-magic
-## https://github.com/Planeshifter/node-wordnet-magic/tree/master/examples
-

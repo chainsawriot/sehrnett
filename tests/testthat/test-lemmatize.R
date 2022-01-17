@@ -1,3 +1,5 @@
+skip_if_not(file.exists(system.file("sqlite-31.db", package = "sehrnett")))
+
 test_that("lemmatize", {
     x1 <- get_lemmas("cars", pos = "n")
     x2 <- get_lemmas("cars", pos = "n", lemmatize = TRUE)

@@ -1,4 +1,4 @@
-###
+skip_if_not(file.exists(system.file("sqlite-31.db", package = "sehrnett")))
 
 test_that("Some expected behaviors of get_outdegrees", {
     x <- get_lemmas("bad")$synsetid[1]

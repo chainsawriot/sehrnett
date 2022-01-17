@@ -1,3 +1,5 @@
+skip_if_not(file.exists(system.file("sqlite-31.db", package = "sehrnett")))
+
 test_that("corner cases", {
     expect_error(x <- get_lemmas(NA), NA)
     expect_error(x <- get_lemmas(""), NA)
@@ -63,4 +65,3 @@ test_that("sehrnett input", {
     expect_true("v" %in% y$pos)
     expect_equal(length(unique(y$pos)), 1)
 })
-
