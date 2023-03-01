@@ -2,8 +2,14 @@
 
 nett_con <- NULL
 .onLoad <- function(libname, pkgname) {
-    download_wordnet()
-    nett_con <<- .create_con()
+    if (!file.exists(system.file("sqlite-31.db", package = "sehrnett"))) {
+        packageStartupMessage("WordNet SQL DB doesn't exist. Attempting to download it from the Internet.")
+        packageStartupMessage("Run `download_wordnet()` interactively to download the WordNet database.")
+        packageStartupMessage("And reload the package.")
+        packageStartupMessage("(Note: WordNet SQL DB is not the same as the WordNet installed on your system.)")
+    } else {
+        nett_con <<- .create_con()
+    }
 }
 
 .onUnload <- function(libname, pkgname) {
@@ -18,6 +24,9 @@ nett_con <- NULL
 }
 
 .fetch_q <- function(q, params) {
+    if (is.null(nett_con)) {
+        stop("Make sure you have WordNet SQL DB downloaded.", call. = FALSE)
+    }
     res <- DBI::dbSendQuery(nett_con, q)
     DBI::dbBind(res, params)
     output <- tibble::as_tibble(DBI::dbFetch(res))

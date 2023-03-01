@@ -10,15 +10,15 @@ download_wordnet <- function(debug = FALSE) {
         return(invisible(TRUE))
     }
     if (!debug) {
-        message("DB doesn't exist. Attempting to download it from the Internet.")
-        message("Make sure you agree with the WordNet License.")
-        message("https://wordnet.princeton.edu/license-and-commercial-use")
+        packageStartupMessage("WordNet SQL DB doesn't exist. Attempting to download it from the Internet.")
+        packageStartupMessage("Make sure you agree with the WordNet License.")
+        packageStartupMessage("https://wordnet.princeton.edu/license-and-commercial-use")
     }
-    if (interactive() & !debug) {
-        message("Press ENTER to agree")
+    if (interactive() && !debug) {
+        packageStartupMessage("Press ENTER to agree")
         rubbish <- readline()
-    } else if (!interactive() & !debug) {
-        message("Run `download_wordnet()` interactively to download the WordNet database.")
+    } else if (!interactive() && !debug) {
+        packageStartupMessage("Run `download_wordnet()` interactively to download the WordNet database.")
         return(invisible(FALSE))
     }
     temploc <- tempfile("sqlite-31.db.zip")
