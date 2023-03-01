@@ -24,7 +24,7 @@ devtools::load_all()
 
 The goal of sehrnett is to provide a nice (and fast) interface to [Princeton's WordNet](https://wordnet.princeton.edu/). Unlike the original [wordnet package](https://cran.r-project.org/package=wordnet) (Feinerer et al., 2020), you don't need to install WordNet and / or setup rJava.
 
-The data is not included in the package. The package will download the data (~100M Zipped, ~400M Unzipped) from the Internet, if such data is not available. Please make sure you agree with the [WordNet License](https://wordnet.princeton.edu/license-and-commercial-use).
+The data is not included in the package. Please run `download_wordnet()` to download the data (~100M Zipped, ~400M Unzipped) from the Internet, if such data is not available. Please make sure you agree with the [WordNet License](https://wordnet.princeton.edu/license-and-commercial-use).
 
 ## Installation
 
