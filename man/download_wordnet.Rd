@@ -3,7 +3,7 @@
 \name{download_wordnet}
 \alias{download_wordnet}
 \alias{delete_wordnet}
-\title{Download And Delete WordNet Database}
+\title{Download And Delete WordNet SQL Database}
 \usage{
 download_wordnet(debug = FALSE)
 
@@ -16,5 +16,5 @@ delete_wordnet()
 TRUE if the database is found. FALSE if there is no database and it is not running in an interactive R session.
 }
 \description{
-To download the WordNet 3.1 data as a sqlite database. It runs automatically in an interactive R session. The size of the database is around 500MB. Please make sure you agree with the WordNet License.
+To download the WordNet 3.1 data as a sqlite database. It runs only in an interactive R session. The size of the database is around 500MB. Please make sure you agree with the WordNet License.
 }

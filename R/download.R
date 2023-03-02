@@ -1,6 +1,6 @@
-#' Download And Delete WordNet Database
+#' Download And Delete WordNet SQL Database
 #'
-#' To download the WordNet 3.1 data as a sqlite database. It runs automatically in an interactive R session. The size of the database is around 500MB. Please make sure you agree with the WordNet License.
+#' To download the WordNet 3.1 data as a sqlite database. It runs only in an interactive R session. The size of the database is around 500MB. Please make sure you agree with the WordNet License.
 #' @param debug a flag for debugging. You should keep it FALSE. (Try at your own risk!)
 #' @return TRUE if the database is found. FALSE if there is no database and it is not running in an interactive R session.
 #' @export
