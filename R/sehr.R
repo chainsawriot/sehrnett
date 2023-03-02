@@ -3,10 +3,10 @@
 nett_con <- NULL
 .onLoad <- function(libname, pkgname) {
     if (!file.exists(system.file("sqlite-31.db", package = "sehrnett"))) {
-        packageStartupMessage("WordNet SQL DB doesn't exist. Attempting to download it from the Internet.")
-        packageStartupMessage("Run `download_wordnet()` interactively to download the WordNet database.")
-        packageStartupMessage("And reload the package.")
-        packageStartupMessage("(Note: WordNet SQL DB is not the same as the WordNet installed on your system.)")
+        packageStartupMessage("WordNet SQL DB doesn't exist.
+Run `download_wordnet()` interactively to download the WordNet database.
+And reload the package.
+(Note: WordNet SQL DB is not the same as the WordNet installed on your system.)")
     } else {
         nett_con <<- .create_con()
     }
