@@ -40,7 +40,7 @@ delete_wordnet <- function() {
 }
 
 .create_con <- function() {
-    download_wordnet()
+    ##download_wordnet()
     if (file.exists(system.file("sqlite-31.db", package = "sehrnett"))) {
         return(DBI::dbConnect(RSQLite::SQLite(), system.file("sqlite-31.db", package = "sehrnett")))
     }
