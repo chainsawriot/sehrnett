@@ -1,6 +1,6 @@
 Package: sehrnett
 Title: A Very Nice Interface to 'WordNet'
-Version: 0.0.4
+Version: 0.1.0
 Authors@R: 
     person(given = "Chung-hong",
            family = "Chan",
